@@ -2,6 +2,7 @@ package bigdecimal
 
 import org.scalatest.{BeforeAndAfter, FunSuite}
 import java.math.MathContext.DECIMAL32
+import ClientInvoiceCalculator._
 
 class ClientInvoiceCalculatorTest extends FunSuite with BeforeAndAfter {
   var ci: ClientInvoice = _
@@ -16,19 +17,19 @@ class ClientInvoiceCalculatorTest extends FunSuite with BeforeAndAfter {
   }
 
   test("CalculateClientInvoiceAllocationErdAmount") {
-    ClientInvoiceCalculator.calculateClientInvoiceAllocationErdAmount( ci)
+    calculateClientInvoiceAllocationErdAmount( ci)
     assert(ci.erdAmount === BigDecimal("2.909571"))
   }
 
   test("CalculateClientInvoiceAllocationErdAmount VAT same") {
     ci.vatAmount = BigDecimal("200", DECIMAL32)
-    ClientInvoiceCalculator.calculateClientInvoiceAllocationErdAmount( ci)
+    calculateClientInvoiceAllocationErdAmount( ci)
     assert(ci.erdAmount === BigDecimal("29.09571"))
   }
 
   test("CalculateClientInvoiceAllocationErdAmount VAT larger") {
     ci.vatAmount = BigDecimal("2000", DECIMAL32)
-    ClientInvoiceCalculator.calculateClientInvoiceAllocationErdAmount(ci)
+    calculateClientInvoiceAllocationErdAmount(ci)
     assert(ci.erdAmount === BigDecimal("0"))
   }
 }
