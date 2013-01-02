@@ -6,18 +6,18 @@ import static java.math.MathContext.DECIMAL32;
 
 public class ClientInvoiceAllocationCalculator {
 
-    public static void calculateClientInvoiceAllocationErdAmount(ClientInvoiceAllocation clientInvoiceAllocation) {
-        BigDecimal vatAmount = clientInvoiceAllocation.getVatAmount();
-        BigDecimal invoiceRate = clientInvoiceAllocation.getInvoiceRate();
-        BigDecimal vatOutStandingAmount = clientInvoiceAllocation.getVatOutStandingAmount();
-        BigDecimal exchangeRate = clientInvoiceAllocation.getExchangeRate();
+    public static void calculateClientInvoiceAllocationErdAmount(ClientInvoiceAllocation cia) {
+        BigDecimal vatAmount = cia.getVatAmount();
+        BigDecimal invoiceRate = cia.getInvoiceRate();
+        BigDecimal vatOutStandingAmount = cia.getVatOutStandingAmount();
+        BigDecimal exchangeRate = cia.getExchangeRate();
 
         if (vatOutStandingAmount.compareTo(vatAmount) != -1) {
-            clientInvoiceAllocation.setErdAmount(
+            cia.setErdAmount(
                     vatAmount.divide(exchangeRate, DECIMAL32)
                             .subtract(vatAmount.divide(invoiceRate, DECIMAL32)));
         } else {
-            clientInvoiceAllocation.setErdAmount(BigDecimal.ZERO);
+            cia.setErdAmount(BigDecimal.ZERO);
         }
     }
 
