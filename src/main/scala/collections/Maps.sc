@@ -1,3 +1,4 @@
+import collection.{mutable, BitSet}
 
 val map = scala.collection.mutable.Map("phil" -> 10, "paul" -> 5)
 val myScore = map.getOrElse("phil", 20)
@@ -17,6 +18,16 @@ val times = Array(2, 10, 3)
 val pairs = symbols.zip(times)
 
 for ((s, n) <- pairs) println(s * n)
+
+
+val scores = new mutable.HashMap[String, Int]()
+
+scores("Phil") = 100
+
+scores("Phil")
+
+
+
 
 
 
